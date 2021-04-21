@@ -28,6 +28,8 @@
           :locale="locale"
           :start="start_"
           :end="end_"
+          :min="min_"
+          :max="max_"
           :hover-start="hoverStart_"
           :hover-end="hoverEnd_"
           @clickNextMonth="clickNextMonth"
@@ -43,6 +45,8 @@
           :locale="locale"
           :start="start_"
           :end="end_"
+          :min="min_"
+          :max="max_"
           :hover-start="hoverStart_"
           :hover-end="hoverEnd_"
           @clickNextMonth="clickNextMonth"
@@ -122,6 +126,16 @@ export default {
       type: String,
       default: moment().add(100, 'year').format('YYYY'),
     },
+    // The minimum available date.
+    minDate: {
+      type: String,
+      default: null,
+    },
+    // The maximum available date.
+    maxDate: {
+      type: String,
+      default: null,
+    },
     // Hide the apply and cancel buttons, and automatically apply a new date range as soon as two dates are clicked.
     autoApply: {
       type: Boolean,
@@ -172,6 +186,8 @@ export default {
 
     data.startText = moment(this.startDate).format(data.locale.format);
     data.endText = moment(this.endDate).format(data.locale.format);
+    data.min_ = this.minDate ? moment(this.minDate) : null;
+    data.max_ = this.maxDate ? moment(this.maxDate) : null;
     data.inRange = false; // inRange means whether user click once, if user click once, set value true
     data.pickerVisible = false;
 
@@ -202,6 +218,9 @@ export default {
      * TODO type of value
      */
     dateClick (value) {
+      if ((this.min_ && value.isBefore(this.min_)) || (this.max_ && value.isAfter(this.max_))) {
+        return false;
+      }
       if (this.inRange) { // second click
         // second click action(第二次点击)
         this.inRange = false;

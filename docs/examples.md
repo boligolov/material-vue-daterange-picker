@@ -155,6 +155,33 @@ export default {
 :::
 
 ## maxDate and minDate `TODO`
+```vue
+  <v-md-date-range-picker
+    start-date="2019-01-01"
+    end-date="2019-01-02"
+    max-date="2021-05-09"
+    min-date="2021-04-09"
+  ></v-md-date-range-picker>
+```
+
+::: demo
+```html
+<template>
+  <div>
+    <v-md-date-range-picker
+      start-date="2021-04-10"
+      end-date="2021-05-07"
+      max-date="2021-05-09"
+      min-date="2021-04-09"
+    ></v-md-date-range-picker>
+  </div>
+</template>
+<script>
+export default {
+}
+</script>
+```
+:::
 
 ## Predefined Date Presets
 > or Ranges or Shortcuts

@@ -66,7 +66,7 @@ function range (start = 0, end, step = 1) {
 export default {
   name: 'calendar',
   inject: ['picker'],
-  props: ['location', 'calendarMonth', 'locale', 'start', 'end'],
+  props: ['location', 'calendarMonth', 'locale', 'start', 'end', 'min', 'max'],
   methods: {
     dayClass (date) {
       const dt = date.clone();
@@ -76,9 +76,11 @@ export default {
       const cleanEnd = clean(this.end);
       const hoverStart = clean(this.picker.hoverStart_);
       const hoverEnd = clean(this.picker.hoverEnd_);
+      const maxDate = this.max !== null ? clean(this.max) : null;
+      const minDate = this.min !== null ? clean(this.min) : null;
 
       return {
-        off: dt.month() !== this.month,
+        off: dt.month() !== this.month || (minDate && cleanDt.isBefore(minDate)) || (maxDate && cleanDt.isAfter(maxDate)),
         // TODO what isoWeekday means ??
         weekend: dt.isoWeekday() > 5,
         today: cleanDt.isSame(cleanToday),
