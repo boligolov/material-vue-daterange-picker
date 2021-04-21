@@ -154,7 +154,7 @@ export default {
 ```
 :::
 
-## maxDate and minDate `TODO`
+## maxDate and minDate
 ```vue
   <v-md-date-range-picker
     start-date="2019-01-01"
@@ -171,8 +171,8 @@ export default {
     <v-md-date-range-picker
       start-date="2021-04-10"
       end-date="2021-05-07"
-      max-date="2021-05-09"
-      min-date="2021-04-09"
+      max-date="2021-04-22"
+      min-date="2021-03-18"
     ></v-md-date-range-picker>
   </div>
 </template>

@@ -1,5 +1,5 @@
 /*!
- * v-md-date-range-picker v0.0.6a
+ * v-md-date-range-picker v0.0.7
  * (c) 2019-present ly525 <lantern.done@gmail.com>
  */
 'use strict';
@@ -683,6 +683,14 @@ var script$3 = {
 
     data.leftCalendarMonth_ = moment(this.startDate);
     data.rightCalendarMonth_ = moment(this.endDate);
+    data.min_ = this.minDate ? moment(this.minDate) : null;
+    data.max_ = this.maxDate ? moment(this.maxDate) : null; // move calendar left, if max date in left calendar
+
+    if (data.max_ !== null && data.max_.month() === data.leftCalendarMonth_.month()) {
+      data.leftCalendarMonth_ = moment(this.max_).subtract(1, 'month');
+      data.rightCalendarMonth_ = moment(this.max_);
+    }
+
     data.start_ = moment(this.startDate);
     data.end_ = moment(this.endDate);
     data.hoverStart_ = moment(this.startDate);
@@ -692,8 +700,6 @@ var script$3 = {
     data.cloneEnd = moment(this.endDate);
     data.startText = moment(this.startDate).format(data.locale.format);
     data.endText = moment(this.endDate).format(data.locale.format);
-    data.min_ = this.minDate ? moment(this.minDate) : null;
-    data.max_ = this.maxDate ? moment(this.maxDate) : null;
     data.inRange = false; // inRange means whether user click once, if user click once, set value true
 
     data.pickerVisible = false; // update day names order to firstDay
@@ -945,11 +951,11 @@ var __vue_staticRenderFns__$3 = [];
   /* style */
   const __vue_inject_styles__$3 = function (inject) {
     if (!inject) return
-    inject("data-v-2b3508fe_0", { source: "@charset \"UTF-8\";*[data-v-2b3508fe]{box-sizing:border-box}.mdrp__panel.opens-arrow-pos-center[data-v-2b3508fe]::after,.mdrp__panel.opens-arrow-pos-center[data-v-2b3508fe]::before{left:0;right:0;width:0;margin-left:auto;margin-right:auto}.mdrp-root[data-v-2b3508fe]{position:relative;display:inline-block}.mdrp__panel[data-v-2b3508fe]{font-size:15px;line-height:1em;position:absolute;z-index:3001;top:100px;left:20px;width:278px;max-width:none;margin-top:7px;padding:0;color:inherit;border:1px solid #ddd;border-radius:4px;background-color:#fff}.mdrp__panel.show-calendar[data-v-2b3508fe]{display:block}.mdrp__panel[data-v-2b3508fe]::after,.mdrp__panel[data-v-2b3508fe]::before{position:absolute;display:inline-block;border-bottom-color:red;content:\"\"}.mdrp__panel[data-v-2b3508fe]::before{top:-7px;border-right:7px solid transparent;border-bottom:7px solid #ccc;border-left:7px solid transparent}.mdrp__panel[data-v-2b3508fe]::after{top:-6px;border-right:6px solid transparent;border-bottom:6px solid #fff;border-left:6px solid transparent}.mdrp__panel.opens-arrow-pos-left[data-v-2b3508fe]{top:40px;left:10px;right:auto}.mdrp__panel.opens-arrow-pos-left[data-v-2b3508fe]::before{left:9px}.mdrp__panel.opens-arrow-pos-left[data-v-2b3508fe]::after{left:10px}.mdrp__panel.opens-arrow-pos-right[data-v-2b3508fe]{top:40px;right:10px;left:auto}.mdrp__panel.opens-arrow-pos-right[data-v-2b3508fe]::before{right:9px}.mdrp__panel.opens-arrow-pos-right[data-v-2b3508fe]::after{right:10px}.mdrp__panel.opens-arrow-pos-center[data-v-2b3508fe]{top:40px}.mdrp__panel.dropdown-menu[data-v-2b3508fe]{max-width:none;z-index:9}.mdrp__panel .calendar-table[data-v-2b3508fe]{display:none;max-width:270px}.mdrp__panel.show-calendar .calendar-table[data-v-2b3508fe]{display:block}@media (min-width:564px){.mdrp__panel[data-v-2b3508fe]{width:auto}.mdrp__panel.show-calendar[data-v-2b3508fe]{display:inline-flex}.mdrp__panel .calendar-table.left[data-v-2b3508fe]{padding:8px 0 8px 8px}.mdrp__panel .calendar-table.right[data-v-2b3508fe]{padding:8px}}.slide-fade-enter-active[data-v-2b3508fe]{transition:all .2s ease}.slide-fade-leave-active[data-v-2b3508fe]{transition:all .1s cubic-bezier(1,.5,.8,1)}.slide-fade-enter[data-v-2b3508fe],.slide-fade-leave-to[data-v-2b3508fe]{transform:translateX(10px);opacity:0}", map: undefined, media: undefined });
+    inject("data-v-531cb0c6_0", { source: "@charset \"UTF-8\";*[data-v-531cb0c6]{box-sizing:border-box}.mdrp__panel.opens-arrow-pos-center[data-v-531cb0c6]::after,.mdrp__panel.opens-arrow-pos-center[data-v-531cb0c6]::before{left:0;right:0;width:0;margin-left:auto;margin-right:auto}.mdrp-root[data-v-531cb0c6]{position:relative;display:inline-block}.mdrp__panel[data-v-531cb0c6]{font-size:15px;line-height:1em;position:absolute;z-index:3001;top:100px;left:20px;width:278px;max-width:none;margin-top:7px;padding:0;color:inherit;border:1px solid #ddd;border-radius:4px;background-color:#fff}.mdrp__panel.show-calendar[data-v-531cb0c6]{display:block}.mdrp__panel[data-v-531cb0c6]::after,.mdrp__panel[data-v-531cb0c6]::before{position:absolute;display:inline-block;border-bottom-color:red;content:\"\"}.mdrp__panel[data-v-531cb0c6]::before{top:-7px;border-right:7px solid transparent;border-bottom:7px solid #ccc;border-left:7px solid transparent}.mdrp__panel[data-v-531cb0c6]::after{top:-6px;border-right:6px solid transparent;border-bottom:6px solid #fff;border-left:6px solid transparent}.mdrp__panel.opens-arrow-pos-left[data-v-531cb0c6]{top:40px;left:10px;right:auto}.mdrp__panel.opens-arrow-pos-left[data-v-531cb0c6]::before{left:9px}.mdrp__panel.opens-arrow-pos-left[data-v-531cb0c6]::after{left:10px}.mdrp__panel.opens-arrow-pos-right[data-v-531cb0c6]{top:40px;right:10px;left:auto}.mdrp__panel.opens-arrow-pos-right[data-v-531cb0c6]::before{right:9px}.mdrp__panel.opens-arrow-pos-right[data-v-531cb0c6]::after{right:10px}.mdrp__panel.opens-arrow-pos-center[data-v-531cb0c6]{top:40px}.mdrp__panel.dropdown-menu[data-v-531cb0c6]{max-width:none;z-index:9}.mdrp__panel .calendar-table[data-v-531cb0c6]{display:none;max-width:270px}.mdrp__panel.show-calendar .calendar-table[data-v-531cb0c6]{display:block}@media (min-width:564px){.mdrp__panel[data-v-531cb0c6]{width:auto}.mdrp__panel.show-calendar[data-v-531cb0c6]{display:inline-flex}.mdrp__panel .calendar-table.left[data-v-531cb0c6]{padding:8px 0 8px 8px}.mdrp__panel .calendar-table.right[data-v-531cb0c6]{padding:8px}}.slide-fade-enter-active[data-v-531cb0c6]{transition:all .2s ease}.slide-fade-leave-active[data-v-531cb0c6]{transition:all .1s cubic-bezier(1,.5,.8,1)}.slide-fade-enter[data-v-531cb0c6],.slide-fade-leave-to[data-v-531cb0c6]{transform:translateX(10px);opacity:0}", map: undefined, media: undefined });
 
   };
   /* scoped */
-  const __vue_scope_id__$3 = "data-v-2b3508fe";
+  const __vue_scope_id__$3 = "data-v-531cb0c6";
   /* module identifier */
   const __vue_module_identifier__$3 = undefined;
   /* functional template */

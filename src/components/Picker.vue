@@ -176,6 +176,16 @@ export default {
     // https://github.com/ly525/blog/issues/258
     data.leftCalendarMonth_ = moment(this.startDate);
     data.rightCalendarMonth_ = moment(this.endDate);
+
+    data.min_ = this.minDate ? moment(this.minDate) : null;
+    data.max_ = this.maxDate ? moment(this.maxDate) : null;
+
+    // move calendar left, if max date in left calendar
+    if (data.max_ !== null && data.max_.month() === data.leftCalendarMonth_.month()) {
+      data.leftCalendarMonth_ = moment(this.max_).subtract(1, 'month');
+      data.rightCalendarMonth_ = moment(this.max_);
+    }
+
     data.start_ = moment(this.startDate);
     data.end_ = moment(this.endDate);
     data.hoverStart_ = moment(this.startDate);
@@ -186,8 +196,6 @@ export default {
 
     data.startText = moment(this.startDate).format(data.locale.format);
     data.endText = moment(this.endDate).format(data.locale.format);
-    data.min_ = this.minDate ? moment(this.minDate) : null;
-    data.max_ = this.maxDate ? moment(this.maxDate) : null;
     data.inRange = false; // inRange means whether user click once, if user click once, set value true
     data.pickerVisible = false;
 
